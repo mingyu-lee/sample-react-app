@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const todos = [
     {
@@ -23,13 +24,19 @@ const todos = [
     }
 ]
 
+Todos.propTypes = {
+    name: PropTypes.string.isRequired,
+    // will be error
+    // name: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string
+}
 
-function Todos({todo, imageUrl}) {
+function Todos({name, imageUrl}) {
     return (
         <li>
             <input type="checkbox" name="todo"/>
-            <label style={{marginLeft: 2}}>{todo}</label><br/>
-            <img src={imageUrl} style={{width: 100}} alt={todo}/>
+            <label style={{marginLeft: 2}}>{name}</label><br/>
+            <img src={imageUrl} style={{width: 100}} alt={name}/>
         </li>
     );
 }
@@ -39,7 +46,7 @@ function App() {
     <div>
       <form>
         <ul>
-            {todos.map(todo => <Todos key={todo.id} todo={todo.name} imageUrl={todo.imageUrl}/>)}
+            {todos.map(todo => <Todos key={todo.id} name={todo.name} imageUrl={todo.imageUrl}/>)}
         </ul>
       </form>
     </div>
