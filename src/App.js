@@ -2,7 +2,7 @@ import React from 'react';
 
 class App extends React.Component {
     state = {
-        count: 0
+        count: null
     };
     increase = () => {
         // this.state를 직접 변경하지 말자, 어차피 동작 안된다
@@ -15,6 +15,27 @@ class App extends React.Component {
         // this.setState({count: this.state.count - 1});
         this.setState(current => ({count: current.count - 1}));
     };
+    componentDidMount() {
+        // 컴포넌트 라이프 사이클 Mounting 단계
+        // 아래 메서드들은 컴포넌트의 인스턴스가 생성되어 DM 상에 삽입될 때에 순서대로 호출된다.
+        // constructor()
+        // static getDerivedStateFromProps()
+        // render()
+        // componentDidMount()
+        // componentDidMount가 주로 사용된다.
+        console.log("rendered")
+        setTimeout(() => {
+            this.setState({count: 0});
+        }, 3000);
+
+    };
+
+    componentWillUnmount() {
+        // 컴포넌트 라이프 사이클 Unmounting 단계
+        // 컴포넌트가 DOM 상에서 제거될 때에 호출된다.
+        console.log("unmounted")
+    }
+
     render() {
         return <div>
             <h3>Count: {this.state.count}</h3>
